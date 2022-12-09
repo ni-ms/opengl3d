@@ -1,0 +1,3 @@
+D:/Third Year/Computer Graphics/Projects/opengl3d/cmake-build-debug/CMakeFiles/opengl3d.dir
+D:/Third Year/Computer Graphics/Projects/opengl3d/cmake-build-debug/CMakeFiles/edit_cache.dir
+D:/Third Year/Computer Graphics/Projects/opengl3d/cmake-build-debug/CMakeFiles/rebuild_cache.dir
