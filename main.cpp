@@ -26,6 +26,26 @@
 #pragma warning (disable: 4305 4244)
 #endif
 
+
+
+class Shader{
+public:
+    Shader(const char* vertexShader, const char* fragmentShader);
+    ~Shader();
+    void use();
+    void unuse();
+    void setUniform(const char* name, float value);
+    void setUniform(const char* name, int value);
+    void setUniform(const char* name, float x, float y, float z);
+    void setUniform(const char* name, float x, float y, float z, float w);
+    void setUniform(const char* name, const float* matrix, int count = 1);
+    void setUniform(const char* name, const int* matrix, int count = 1);
+    void setUniform(const char* name, const float* matrix, int count, bool transpose);
+    void setUniform(const char* name, const int* matrix, int count, bool transpose);
+};
+
+
+
 static const char *helpprompt[] = {"Press F1 for help", 0};
 static const char *helptext[] = {
         "Rotate: left mouse drag",
@@ -46,6 +66,98 @@ void keypress(unsigned char key, int x, int y);
 void skeypress(int key, int x, int y);
 void mouse(int bn, int st, int x, int y);
 void motion(int x, int y);
+
+void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloat Clength, GLfloat Cbreadth, GLfloat Cheight)
+{
+    GLfloat halfLength = Clength * 0.5f;
+    GLfloat halfbreadth = Cbreadth * 0.5f;
+    GLfloat halfheight = Cheight * 0.5f;
+    glEnable(GL_DEPTH_TEST);
+    /*glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);*/
+    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
+    glEnable(GL_COLOR_MATERIAL);
+    glDisable(GL_CULL_FACE);
+
+    //GLfloat colour[] = { 0.0f, 1.0f, 0.0f };
+
+    GLfloat vertices[] =
+            {
+                    // front face
+                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top left
+                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top right
+                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // bottom right
+                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // bottom left
+
+                    // back face
+                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top left
+                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top right
+                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom right
+                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom left
+
+                    // left face
+                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top left
+                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top right
+                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom right
+                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // bottom left
+
+                    // right face
+                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top left
+                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top right
+                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom right
+                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // bottom left
+
+                    // top face
+                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top left
+                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top right
+                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // bottom right
+                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // bottom left
+
+                    // top face
+                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // top left
+                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // top right
+                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom right
+                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ + halfbreadth  // bottom left
+            };
+
+
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
+    //glClear(GL_COLOR_BUFFER_BIT);
+    //glClearColor(0.9f, 0.9f, 0.9f, 1);
+    // reset matrix
+    // fill display list
+    // glColor3f(150, 255, 255);
+    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
+    //glColor3f(0, 0, 0);
+
+      // Green
+    // glVertex3f(0.5f, 0.5f, -0.5f);
+
+    // Bottom face (y = -1.0f)
+    // glColor3f(1.0f, 0.5f, 0.0f);     // Orange
+    // glVertex3f(0.5f, -0.5f, 0.5f);
+
+    // Front face  (z = 1.0f)
+    // glColor3f(1.0f, 0.0f, 0.0f);     // Red
+    // glVertex3f(0.5f, 0.5f, 0.5f);
+
+    // Back face (z = -1.0f)
+    // glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
+    //glVertex3f(0.5f, -0.5f, -0.5f);
+
+    // Left face (x = -1.0f)
+    // glColor3f(0.0f, 0.0f, 1.0f);     // Blue
+    // glVertex3f(-0.5f, 0.5f, 0.5f);
+
+    glEnableClientState(GL_VERTEX_ARRAY);
+
+    glVertexPointer(3, GL_FLOAT, 0, vertices);
+
+    glDrawArrays(GL_QUADS, 0, 24);
+
+    glDisableClientState(GL_VERTEX_ARRAY);
+}
 
 int win_width, win_height;
 float cam_theta, cam_phi = 25, cam_dist = 8;
@@ -81,9 +193,13 @@ int main(int argc, char **argv)
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);
+    /*glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);*/
+    glEnable(GL_MULTISAMPLE);
+    glEnable(GL_FRAMEBUFFER_SRGB);
 
+    glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE ) ;
+    glEnable(GL_COLOR_MATERIAL);
     glutMainLoop();
     return 0;
 }
@@ -99,6 +215,7 @@ void display(void)
     float lpos[] = {-1, 2, 3, 0};
 
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
 
     glMatrixMode(GL_MODELVIEW);
     glLoadIdentity();
@@ -122,24 +239,31 @@ void display(void)
 
     //Left rectangle
     glPushMatrix();
+    float temp[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT,temp );
     glTranslatef(-8, 3, -5);
     glScalef(3, 7, 4);
     glutSolidCube(1);
     glPopMatrix();
 
     glPushMatrix();
+    float col[4] = {1.0f, 0.0f, 0.0f, 0.0f};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE,col );
+
     glTranslatef(8, 3, -5);
     glScalef(3, 7, 4);
     glutSolidCube(1);
     glPopMatrix();
 
     glPushMatrix();
+
     glTranslatef(6, 2.5, -5);
     glScalef(3, 5, 4);
     glutSolidCube(1);
     glPopMatrix();
 
     glPushMatrix();
+
     glTranslatef(-6, 2.5, -5);
     glScalef(3, 5, 4);
     glutSolidCube(1);
@@ -147,6 +271,7 @@ void display(void)
 
     //Center
     glPushMatrix();
+
     glTranslatef(0, 3, -5);
     glScalef(9, 7.5, 4);
     glutSolidCube(1);
@@ -154,20 +279,30 @@ void display(void)
 
     //Dias
     glPushMatrix();
+
+
     glTranslatef(0, 0.5, -2);
     glScalef(9, 1, 5);
     glutSolidCube(1);
+
     glPopMatrix();
 
 
     //Grass paths
     glPushMatrix();
+
+
     glTranslatef(0, 0.5, -2);
     glScalef(9, 1, 5);
     glutSolidCube(1);
     glPopMatrix();
 
+    glPushMatrix();
+    DrawCube(5, 5, 5, 5, 5, 5);
+    glPopMatrix();
+
     glBegin(GL_QUADS);
+
     glVertex3f(-10, 0, -10);
     glVertex3f(-10, 0, 10);
     glVertex3f(10, 0, 10);
