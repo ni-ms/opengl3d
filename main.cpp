@@ -16,6 +16,7 @@
 #include <string.h>
 #include <math.h>
 #include <GL/freeglut.h>
+#include <json/json.h>
 
 #ifndef M_PI
 #define M_PI	3.14159265358979323846
@@ -151,7 +152,20 @@ void display(void)
     glutSolidCube(1);
     glPopMatrix();
 
+    //Dias
+    glPushMatrix();
+    glTranslatef(0, 0.5, -2);
+    glScalef(9, 1, 5);
+    glutSolidCube(1);
+    glPopMatrix();
 
+
+    //Grass paths
+    glPushMatrix();
+    glTranslatef(0, 0.5, -2);
+    glScalef(9, 1, 5);
+    glutSolidCube(1);
+    glPopMatrix();
 
     glBegin(GL_QUADS);
     glVertex3f(-10, 0, -10);
