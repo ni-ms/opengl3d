@@ -1,0 +1,11 @@
+Model Information:
+* title:	Tree Pinus
+* source:	https://sketchfab.com/3d-models/tree-pinus-2e16895e73354144b5a41192b7810121
+* author:	AGASTRO (https://sketchfab.com/AGASTRO)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Tree Pinus" (https://sketchfab.com/3d-models/tree-pinus-2e16895e73354144b5a41192b7810121) by AGASTRO (https://sketchfab.com/AGASTRO) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

@@ -16,7 +16,10 @@
 #include <string.h>
 #include <math.h>
 #include <GL/freeglut.h>
-#include <json/json.h>
+#include <tiny_gltf.h>
+#include <GL/glut.h>
+#include <iostream>
+
 
 #ifndef M_PI
 #define M_PI	3.14159265358979323846
@@ -25,25 +28,6 @@
 #ifdef _MSC_VER
 #pragma warning (disable: 4305 4244)
 #endif
-
-
-
-class Shader{
-public:
-    Shader(const char* vertexShader, const char* fragmentShader);
-    ~Shader();
-    void use();
-    void unuse();
-    void setUniform(const char* name, float value);
-    void setUniform(const char* name, int value);
-    void setUniform(const char* name, float x, float y, float z);
-    void setUniform(const char* name, float x, float y, float z, float w);
-    void setUniform(const char* name, const float* matrix, int count = 1);
-    void setUniform(const char* name, const int* matrix, int count = 1);
-    void setUniform(const char* name, const float* matrix, int count, bool transpose);
-    void setUniform(const char* name, const int* matrix, int count, bool transpose);
-};
-
 
 
 static const char *helpprompt[] = {"Press F1 for help", 0};
@@ -66,6 +50,7 @@ void keypress(unsigned char key, int x, int y);
 void skeypress(int key, int x, int y);
 void mouse(int bn, int st, int x, int y);
 void motion(int x, int y);
+
 
 void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloat Clength, GLfloat Cbreadth, GLfloat Cheight)
 {
@@ -129,6 +114,7 @@ void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloa
     glVertex3f(centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth);  // v24
     glEnd();
 }
+
 
 
 int win_width, win_height;
@@ -213,65 +199,65 @@ void display(void)
 //    float temp[4] = {0.0f, 0.0f, 0.0f, 0.0f};
 //    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT,temp );
     glColor3f(0.5, 0.5, 0.5);
-    glTranslatef(-8, 3, -5);
-    glScalef(3, 7, 4);
-    glutSolidCube(1);
+//    glTranslatef(-8, 3, -5);
+//    glScalef(3, 7, 4);
+//    glutSolidCube(1);
+    DrawCube(-8, 3, -5, 3, 4, 7);
     glPopMatrix();
 
     glPushMatrix();
 //    float col[4] = {1.0f, 0.0f, 0.0f, 0.0f};
 //    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE,col );
 
-    glTranslatef(8, 3, -5);
-    glScalef(3, 7, 4);
-    glutSolidCube(1);
+//    glTranslatef(8, 3, -5);
+//    glScalef(3, 7, 4);
+//    glutSolidCube(1);
+    DrawCube(8, 3, -5, 3, 4, 7);
     glPopMatrix();
-    glPushMatrix();
 
-    glTranslatef(6, 2.5, -5);
-    glScalef(3, 5, 4);
-    glutSolidCube(1);
-    glPopMatrix();
 
     glPushMatrix();
 
-    glTranslatef(-6, 2.5, -5);
-    glScalef(3, 5, 4);
-    glutSolidCube(1);
+//    glTranslatef(6, 2.5, -5);
+//    glScalef(3, 5, 4);
+//    glutSolidCube(1);
+    DrawCube(6, 2.5, -5, 3, 4, 5);
+    glPopMatrix();
+
+    glPushMatrix();
+
+//    glTranslatef(-6, 2.5, -5);
+//    glScalef(3, 5, 4);
+//    glutSolidCube(1);
+    DrawCube(-6, 2.5, -5, 3, 4, 5);
     glPopMatrix();
 
     //Center
     glPushMatrix();
 
-    glTranslatef(0, 3, -5);
-    glScalef(9, 7.5, 4);
-    glutSolidCube(1);
+//    glTranslatef(0, 3, -5);
+//    glScalef(9, 7.5, 4);
+//    glutSolidCube(1);
+
+    DrawCube(0, 3, -5, 9, 4, 7.5);
     glPopMatrix();
 
     //Dias
     glPushMatrix();
 
 
-    glTranslatef(0, 0.5, -2);
-    glScalef(9, 1, 5);
-    glutSolidCube(1);
+//    glTranslatef(0, 0.5, -2);
+//    glScalef(9, 1, 5);
+//    glutSolidCube(1);
+
+    DrawCube(0, 0.5, -2, 9, 5, 1);
 
     glPopMatrix();
 
 
     //Grass paths
     glPushMatrix();
-
-
-    glTranslatef(0, 0.5, -2);
-    glScalef(9, 1, 5);
-    glutSolidCube(1);
     glPopMatrix();
-
-    glPushMatrix();
-    DrawCube(5, 5, 5, 5, 5, 5);
-    glPopMatrix();
-
     glBegin(GL_QUADS);
 
     glVertex3f(-10, 0, -10);
@@ -283,6 +269,10 @@ void display(void)
 
 
     print_help();
+
+
+
+    //Display model
 
     glutSwapBuffers();
     nframes++;
