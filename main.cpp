@@ -73,91 +73,63 @@ void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloa
     GLfloat halfbreadth = Cbreadth * 0.5f;
     GLfloat halfheight = Cheight * 0.5f;
     glEnable(GL_DEPTH_TEST);
-    /*glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);*/
-    glColorMaterial(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE);
-    glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glShadeModel(GL_SMOOTH);
     glDisable(GL_CULL_FACE);
-
-    //GLfloat colour[] = { 0.0f, 1.0f, 0.0f };
-
-    GLfloat vertices[] =
-            {
-                    // front face
-                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top left
-                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top right
-                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // bottom right
-                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // bottom left
-
-                    // back face
-                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top left
-                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top right
-                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom right
-                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom left
-
-                    // left face
-                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top left
-                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top right
-                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom right
-                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // bottom left
-
-                    // right face
-                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top left
-                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top right
-                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom right
-                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // bottom left
-
-                    // top face
-                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // top left
-                    centerPosX - halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // top right
-                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ - halfbreadth, // bottom right
-                    centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth, // bottom left
-
-                    // top face
-                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ + halfbreadth, // top left
-                    centerPosX - halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // top right
-                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ - halfbreadth, // bottom right
-                    centerPosX + halfLength, centerPosY - halfheight, centerPosZ + halfbreadth  // bottom left
-            };
-
-
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
-    //glClear(GL_COLOR_BUFFER_BIT);
-    //glClearColor(0.9f, 0.9f, 0.9f, 1);
-    // reset matrix
-    // fill display list
-    // glColor3f(150, 255, 255);
-    //glPolygonMode(GL_FRONT_AND_BACK, GL_LINES);
-    //glColor3f(0, 0, 0);
-
-      // Green
-    // glVertex3f(0.5f, 0.5f, -0.5f);
-
+    GLfloat mat_ambient[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+    glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
+    GLfloat mat_diffuse[] = { 0.1f, 0.5f, 0.8f, 1.0f };
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+    GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
+    GLfloat mat_shininess[] = { 50.0f };
+    glMaterialfv(GL_FRONT, GL_SHININESS, mat_shininess);
+    GLfloat lightIntensity[] = { 0.7f, 0.7f, 0.7f, 1.0f };
+    GLfloat light_position[] = { 2.0f, 6.0f, 3.0f, 0.0f };
+    glLightfv(GL_LIGHT0, GL_POSITION, light_position);
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, lightIntensity);
+    glBegin(GL_QUADS);
+    // Top face (y = 1.0f)
+    // Define vertices in counter-clockwise (CCW) order with normal pointing out
+    glNormal3f(0.0f, 1.0f, 0.0f);     // Normal points up
+    glVertex3f(centerPosX - halfLength, centerPosY + halfheight, centerPosZ - halfbreadth);  // v1
+    glVertex3f(centerPosX + halfLength, centerPosY + halfheight, centerPosZ - halfbreadth);  // v2
+    glVertex3f(centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth);  // v3
+    glVertex3f(centerPosX - halfLength, centerPosY + halfheight, centerPosZ + halfbreadth);  // v4
     // Bottom face (y = -1.0f)
-    // glColor3f(1.0f, 0.5f, 0.0f);     // Orange
-    // glVertex3f(0.5f, -0.5f, 0.5f);
-
+    glNormal3f(0.0f, -1.0f, 0.0f);    // Normal points down
+    glVertex3f(centerPosX - halfLength, centerPosY - halfheight, centerPosZ - halfbreadth);  // v5
+    glVertex3f(centerPosX - halfLength, centerPosY - halfheight, centerPosZ + halfbreadth);  // v6
+    glVertex3f(centerPosX + halfLength, centerPosY - halfheight, centerPosZ + halfbreadth);  // v7
+    glVertex3f(centerPosX + halfLength, centerPosY - halfheight, centerPosZ - halfbreadth);  // v8
     // Front face  (z = 1.0f)
-    // glColor3f(1.0f, 0.0f, 0.0f);     // Red
-    // glVertex3f(0.5f, 0.5f, 0.5f);
-
+    glNormal3f(0.0f, 0.0f, 1.0f);     // Normal points towards viewer
+    glVertex3f(centerPosX - halfLength, centerPosY - halfheight, centerPosZ + halfbreadth);  // v9
+    glVertex3f(centerPosX + halfLength, centerPosY - halfheight, centerPosZ + halfbreadth);  // v10
+    glVertex3f(centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth);  // v11
+    glVertex3f(centerPosX - halfLength, centerPosY + halfheight, centerPosZ + halfbreadth);  // v12
     // Back face (z = -1.0f)
-    // glColor3f(1.0f, 1.0f, 0.0f);     // Yellow
-    //glVertex3f(0.5f, -0.5f, -0.5f);
-
+    glNormal3f(0.0f, 0.0f, -1.0f);    // Normal points away from viewer
+    glVertex3f(centerPosX - halfLength, centerPosY - halfheight, centerPosZ - halfbreadth);  // v13
+    glVertex3f(centerPosX - halfLength, centerPosY + halfheight, centerPosZ - halfbreadth);  // v14
+    glVertex3f(centerPosX + halfLength, centerPosY + halfheight, centerPosZ - halfbreadth);  // v15
+    glVertex3f(centerPosX + halfLength, centerPosY - halfheight, centerPosZ - halfbreadth);  // v16
     // Left face (x = -1.0f)
-    // glColor3f(0.0f, 0.0f, 1.0f);     // Blue
-    // glVertex3f(-0.5f, 0.5f, 0.5f);
-
-    glEnableClientState(GL_VERTEX_ARRAY);
-
-    glVertexPointer(3, GL_FLOAT, 0, vertices);
-
-    glDrawArrays(GL_QUADS, 0, 24);
-
-    glDisableClientState(GL_VERTEX_ARRAY);
+    glNormal3f(-1.0f, 0.0f, 0.0f);    // Normal points left
+    glVertex3f(centerPosX - halfLength, centerPosY - halfheight, centerPosZ + halfbreadth);  // v17
+    glVertex3f(centerPosX - halfLength, centerPosY + halfheight, centerPosZ + halfbreadth);  // v18
+    glVertex3f(centerPosX - halfLength, centerPosY + halfheight, centerPosZ - halfbreadth);  // v19
+    glVertex3f(centerPosX - halfLength, centerPosY - halfheight, centerPosZ - halfbreadth);  // v20
+    // Right face (x = 1.0f)
+    glNormal3f(1.0f, 0.0f, 0.0f);     // Normal points right
+    glVertex3f(centerPosX + halfLength, centerPosY - halfheight, centerPosZ + halfbreadth);  // v21
+    glVertex3f(centerPosX + halfLength, centerPosY - halfheight, centerPosZ - halfbreadth);  // v22
+    glVertex3f(centerPosX + halfLength, centerPosY + halfheight, centerPosZ - halfbreadth);  // v23
+    glVertex3f(centerPosX + halfLength, centerPosY + halfheight, centerPosZ + halfbreadth);  // v24
+    glEnd();
 }
+
 
 int win_width, win_height;
 float cam_theta, cam_phi = 25, cam_dist = 8;
@@ -193,13 +165,12 @@ int main(int argc, char **argv)
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_CULL_FACE);
-    /*glEnable(GL_LIGHTING);
-    glEnable(GL_LIGHT0);*/
-    glEnable(GL_MULTISAMPLE);
-    glEnable(GL_FRAMEBUFFER_SRGB);
-
-    glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE ) ;
-    glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+//    glEnable(GL_MULTISAMPLE);
+//    glEnable(GL_FRAMEBUFFER_SRGB);
+//    glColorMaterial ( GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE ) ;
+//    glEnable(GL_COLOR_MATERIAL);
     glutMainLoop();
     return 0;
 }
@@ -239,22 +210,22 @@ void display(void)
 
     //Left rectangle
     glPushMatrix();
-    float temp[4] = {0.0f, 0.0f, 0.0f, 0.0f};
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT,temp );
+//    float temp[4] = {0.0f, 0.0f, 0.0f, 0.0f};
+//    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT,temp );
+    glColor3f(0.5, 0.5, 0.5);
     glTranslatef(-8, 3, -5);
     glScalef(3, 7, 4);
     glutSolidCube(1);
     glPopMatrix();
 
     glPushMatrix();
-    float col[4] = {1.0f, 0.0f, 0.0f, 0.0f};
-    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE,col );
+//    float col[4] = {1.0f, 0.0f, 0.0f, 0.0f};
+//    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE,col );
 
     glTranslatef(8, 3, -5);
     glScalef(3, 7, 4);
     glutSolidCube(1);
     glPopMatrix();
-
     glPushMatrix();
 
     glTranslatef(6, 2.5, -5);
