@@ -121,26 +121,33 @@ void display(void)
 
     //Left rectangle
     glPushMatrix();
-    glTranslatef(-7, 3, -5);
+    glTranslatef(-8, 3, -5);
     glScalef(3, 7, 4);
     glutSolidCube(1);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(7, 3, -5);
+    glTranslatef(8, 3, -5);
     glScalef(3, 7, 4);
     glutSolidCube(1);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(5, 2.5, -5);
-    glScalef(2, 5, 4);
+    glTranslatef(6, 2.5, -5);
+    glScalef(3, 5, 4);
     glutSolidCube(1);
     glPopMatrix();
 
     glPushMatrix();
-    glTranslatef(-5, 2.5, -5);
-    glScalef(2, 5, 4);
+    glTranslatef(-6, 2.5, -5);
+    glScalef(3, 5, 4);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    //Center
+    glPushMatrix();
+    glTranslatef(0, 3, -5);
+    glScalef(9, 7.5, 4);
     glutSolidCube(1);
     glPopMatrix();
 
