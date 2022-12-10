@@ -63,6 +63,7 @@ long nframes;
 #define GL_MULTISAMPLE 0x809d
 #endif
 
+
 int main(int argc, char **argv)
 {
     glutInit(&argc, argv);
@@ -118,19 +119,38 @@ void display(void)
 
 
 
+    //Left rectangle
     glPushMatrix();
-    glTranslatef(-2.5, 0, 0);
-    glutSolidCube(1.5);
+    glTranslatef(-7, 3, -5);
+    glScalef(3, 7, 4);
+    glutSolidCube(1);
+    glPopMatrix();
 
+    glPushMatrix();
+    glTranslatef(7, 3, -5);
+    glScalef(3, 7, 4);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(5, 2.5, -5);
+    glScalef(2, 5, 4);
+    glutSolidCube(1);
+    glPopMatrix();
+
+    glPushMatrix();
+    glTranslatef(-5, 2.5, -5);
+    glScalef(2, 5, 4);
+    glutSolidCube(1);
     glPopMatrix();
 
 
+
     glBegin(GL_QUADS);
-    glNormal3f(0, 1, 0);
-    glVertex3f(-5, -1.3, 5);
-    glVertex3f(5, -1.3, 5);
-    glVertex3f(5, -1.3, -5);
-    glVertex3f(-5, -1.3, -5);
+    glVertex3f(-10, 0, -10);
+    glVertex3f(-10, 0, 10);
+    glVertex3f(10, 0, 10);
+    glVertex3f(10, 0, -10);
     glEnd();
 
 
