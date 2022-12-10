@@ -16,7 +16,7 @@
 #include <string.h>
 #include <math.h>
 #include <GL/freeglut.h>
-#include <tiny_gltf.h>
+
 #include <GL/glut.h>
 #include <iostream>
 
@@ -254,6 +254,13 @@ void display(void)
 
     glPopMatrix();
 
+    //SOLID SPHERE
+
+    glPushMatrix();
+    glTranslated(0, 5, -5);
+    glScalef(1, 1, 0.5);
+    glutSolidSphere(3, 20, 20);
+    glPopMatrix();
 
     //Grass paths
     glPushMatrix();

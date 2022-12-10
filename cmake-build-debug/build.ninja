@@ -49,8 +49,8 @@ cmake_ninja_workdir = D$:/Third$ Year/Computer$ Graphics/Projects/opengl3d/cmake
 
 build cmake_object_order_depends_target_opengl3d: phony || CMakeFiles/opengl3d.dir
 
-build CMakeFiles/opengl3d.dir/loadgltf.cpp.obj: CXX_COMPILER__opengl3d_Debug D$:/Third$ Year/Computer$ Graphics/Projects/opengl3d/loadgltf.cpp || cmake_object_order_depends_target_opengl3d
-  DEP_FILE = CMakeFiles\opengl3d.dir\loadgltf.cpp.obj.d
+build CMakeFiles/opengl3d.dir/main.cpp.obj: CXX_COMPILER__opengl3d_Debug D$:/Third$ Year/Computer$ Graphics/Projects/opengl3d/main.cpp || cmake_object_order_depends_target_opengl3d
+  DEP_FILE = CMakeFiles\opengl3d.dir\main.cpp.obj.d
   FLAGS = -g -fdiagnostics-color=always
   OBJECT_DIR = CMakeFiles\opengl3d.dir
   OBJECT_FILE_DIR = CMakeFiles\opengl3d.dir
@@ -63,7 +63,7 @@ build CMakeFiles/opengl3d.dir/loadgltf.cpp.obj: CXX_COMPILER__opengl3d_Debug D$:
 #############################################
 # Link the executable opengl3d.exe
 
-build opengl3d.exe: CXX_EXECUTABLE_LINKER__opengl3d_Debug CMakeFiles/opengl3d.dir/loadgltf.cpp.obj
+build opengl3d.exe: CXX_EXECUTABLE_LINKER__opengl3d_Debug CMakeFiles/opengl3d.dir/main.cpp.obj
   FLAGS = -g
   LINK_LIBRARIES = -lOpenGL32  -lfreeGlut  -lkernel32 -luser32 -lgdi32 -lwinspool -lshell32 -lole32 -loleaut32 -luuid -lcomdlg32 -ladvapi32
   OBJECT_DIR = CMakeFiles\opengl3d.dir
