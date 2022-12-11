@@ -52,7 +52,7 @@ void mouse(int bn, int st, int x, int y);
 void motion(int x, int y);
 
 
-void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloat Clength, GLfloat Cbreadth, GLfloat Cheight)
+void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloat Clength, GLfloat Cbreadth, GLfloat Cheight, GLfloat colour[])
 {
     GLfloat halfLength = Clength * 0.5f;
     GLfloat halfbreadth = Cbreadth * 0.5f;
@@ -65,7 +65,7 @@ void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloa
     GLfloat mat_ambient[] = { 0.7f, 0.7f, 0.7f, 1.0f };
     glMaterialfv(GL_FRONT, GL_AMBIENT, mat_ambient);
     GLfloat mat_diffuse[] = { 0.1f, 0.5f, 0.8f, 1.0f };
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, colour);
     GLfloat mat_specular[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
     GLfloat mat_shininess[] = { 50.0f };
@@ -202,7 +202,8 @@ void display(void)
 //    glTranslatef(-8, 3, -5);
 //    glScalef(3, 7, 4);
 //    glutSolidCube(1);
-    DrawCube(-8, 3, -5, 3, 4, 7);
+GLfloat color[] = {1.0, 0.93, 0.75, 1.0};
+    DrawCube(-8, 3, -5, 3, 4, 7, color);
     glPopMatrix();
 
     glPushMatrix();
@@ -212,7 +213,8 @@ void display(void)
 //    glTranslatef(8, 3, -5);
 //    glScalef(3, 7, 4);
 //    glutSolidCube(1);
-    DrawCube(8, 3, -5, 3, 4, 7);
+    GLfloat color1[] = {1, 0.9, 0.5, 1.0};
+    DrawCube(8, 3, -5, 3, 4, 7,color);
     glPopMatrix();
 
 
@@ -221,7 +223,8 @@ void display(void)
 //    glTranslatef(6, 2.5, -5);
 //    glScalef(3, 5, 4);
 //    glutSolidCube(1);
-    DrawCube(6, 2.5, -5, 3, 4, 5);
+    GLfloat color2[] = {0.5, 0.5, 0.5, 1.0};
+    DrawCube(6, 2.5, -5, 3, 4, 5,color);
     glPopMatrix();
 
     glPushMatrix();
@@ -229,7 +232,8 @@ void display(void)
 //    glTranslatef(-6, 2.5, -5);
 //    glScalef(3, 5, 4);
 //    glutSolidCube(1);
-    DrawCube(-6, 2.5, -5, 3, 4, 5);
+    GLfloat color3[] = {0.5, 0.5, 0.5, 1.0};
+    DrawCube(-6, 2.5, -5, 3, 4, 5,color);
     glPopMatrix();
 
     //Center
@@ -238,8 +242,8 @@ void display(void)
 //    glTranslatef(0, 3, -5);
 //    glScalef(9, 7.5, 4);
 //    glutSolidCube(1);
-
-    DrawCube(0, 3, -5, 9, 4, 7.5);
+    GLfloat color4[] = {0.5, 0.5, 0.5, 1.0};
+    DrawCube(0, 3, -5, 9, 4, 7.5,color);
     glPopMatrix();
 
     //Dias
@@ -249,8 +253,8 @@ void display(void)
 //    glTranslatef(0, 0.5, -2);
 //    glScalef(9, 1, 5);
 //    glutSolidCube(1);
-
-    DrawCube(0, 0.5, -2, 9, 5, 1);
+    GLfloat color5[] = {0.5, 0.5, 0.5, 1.0};
+    DrawCube(0, 0.5, -2, 9, 5, 1,color5);
 
     glPopMatrix();
 
