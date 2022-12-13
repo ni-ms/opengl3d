@@ -89,8 +89,138 @@ void drawBush(GLdouble x, GLdouble y, GLdouble z, GLdouble r, GLdouble h)
     glDisable(GL_TEXTURE_2D);
 }
 
+#include <iostream>
+#include <fstream>
+#include <vector>
+#include <GL/glut.h>
+#include <sstream>
+#include <iterator>
 
-void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloat Clength, GLfloat Cbreadth, GLfloat Cheight, GLfloat colour[])
+// structure to store a vertex
+struct Vertex
+{
+    float x, y, z;
+};
+
+// structure to store a face
+struct Face
+{
+    int v1, v2, v3;
+};
+
+std::vector<Vertex> vertices;  // vector to store vertices
+std::vector<Face> faces;       // vector to store faces
+
+void render()
+{
+    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+
+
+
+    // iterate through all the faces
+    for (int i = 0; i < faces.size(); i++)
+    {
+        Face face = faces[i];
+
+        // get the vertices of the face
+        Vertex v1 = vertices[face.v1 - 1];
+        Vertex v2 = vertices[face.v2 - 1];
+        Vertex v3 = vertices[face.v3 - 1];
+
+        // draw the face
+        glBegin(GL_TRIANGLES);
+        glVertex3f(v1.x, v1.y, v1.z);
+        glVertex3f(v2.x, v2.y, v2.z);
+        glVertex3f(v3.x, v3.y, v3.z);
+        glEnd();
+    }
+
+    glutSwapBuffers();
+}
+
+void loadObj(const char* filename, float xPos, float yPos, float zPos)
+{
+    // open the file
+    std::ifstream file(filename);
+    if (!file.is_open())
+    {
+        std::cerr << "Error: Unable to open file '" << filename << "'" << std::endl;
+        return;
+    }
+
+
+    // read the file line by line
+    std::string line;
+    Face face{};
+    Vertex vertex{};
+    while (std::getline(file, line))
+    {
+        // split the line into tokens
+        std::istringstream iss(line);
+        std::vector<std::string> tokens{std::istream_iterator<std::string>{iss}, std::istream_iterator<std::string>{}};
+
+        // parse the line based on the first token
+        if (tokens.empty())
+            continue;
+
+        if (tokens[0] == "v")
+        {
+            // line defines a vertex
+
+            vertex.x = std::stof(tokens[1]);
+            vertex.y = std::stof(tokens[2]);
+            vertex.z = std::stof(tokens[3]);
+            vertices.push_back(vertex);
+        }
+        else if (tokens[0] == "f")
+        {
+            // line defines a face
+
+            face.v1 = std::stoi(tokens[1]);
+            face.v2 = std::stoi(tokens[2]);
+            face.v3 = std::stoi(tokens[3]);
+            faces.push_back(face);
+        }
+    }
+    file.close();
+//    // Clear the screen
+//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+//
+//    // Set the view matrix
+//    glMatrixMode(GL_MODELVIEW);
+//    glLoadIdentity();
+
+
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);
+    glShadeModel(GL_SMOOTH);
+    glDisable(GL_CULL_FACE);
+for(const Face& face : faces){
+    // Retrieve the vertices for this face
+    const Vertex& v1 = vertices[face.v1 - 1];
+    const Vertex& v2 = vertices[face.v2 - 1];
+    const Vertex& v3 = vertices[face.v3 - 1];
+
+    // Draw the face
+    glBegin(GL_TRIANGLES);
+
+
+    glVertex3f(v1.x + xPos, v1.y + yPos, v1.z + zPos);
+    glVertex3f(v2.x + xPos, v2.y + yPos, v2.z + zPos);
+    glVertex3f(v3.x + xPos, v3.y + yPos, v3.z + zPos);
+
+    glEnd();
+}
+    // Swap the front and back buffers
+//    glutSwapBuffers();
+
+
+}
+
+
+
+ void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloat Clength, GLfloat Cbreadth, GLfloat Cheight, GLfloat colour[])
 {
     GLfloat halfLength = Clength * 0.5f;
     GLfloat halfbreadth = Cbreadth * 0.5f;
@@ -219,6 +349,13 @@ void display(void)
     glRotatef(cam_theta, 0, 1, 0);
     glTranslatef(cam_pan[0], cam_pan[1], cam_pan[2]);
 
+    //IMPORT MODEL
+    glPushMatrix();
+
+
+    loadObj("car.obj", 0.5, 0.5, 0.5);
+    glPopMatrix();
+
     glLightfv(GL_LIGHT0, GL_POSITION, lpos);
 
     glPushMatrix();
@@ -316,9 +453,9 @@ GLfloat color[] = {0.58, 0.23, 0.19, 1.0};
 
     //BUSH
 
-    glPushMatrix();
 
-    glPopMatrix();
+
+
 
 
     glBegin(GL_QUADS);
@@ -440,12 +577,37 @@ void keypress(unsigned char key, int x, int y)
     }
 }
 
+void cameraYawRight(){
+   float cameraYaw = 0;
+   cameraYaw+= 0.1;
+    glRotatef(cameraYaw, 0, 0, 1);
+    glutPostRedisplay();
+
+}
+void cameraYawLeft(){
+    float cameraYawLeft = 0;
+    cameraYawLeft -= 0.1;
+            glRotatef(cameraYawLeft, 0, 0, 1);
+    glutPostRedisplay();
+}
 void skeypress(int key, int x, int y)
 {
     switch(key) {
         case GLUT_KEY_F1:
             help ^= 1;
             glutPostRedisplay();
+            break;
+
+            case GLUT_KEY_F2:
+                cameraYawRight();
+            break;
+
+            case GLUT_KEY_F3:
+                cameraYawLeft();
+            break;
+
+
+
 
         default:
             break;
@@ -499,3 +661,5 @@ void motion(int x, int y)
         glutPostRedisplay();
     }
 }
+
+
