@@ -138,7 +138,7 @@ void render()
     glutSwapBuffers();
 }
 
-void loadObj(const char* filename, float xPos, float yPos, float zPos)
+void loadObj(const char* filename, float xPos, float yPos, float zPos, float scale, GLfloat colour[])
 {
     // open the file
     std::ifstream file(filename);
@@ -196,7 +196,12 @@ void loadObj(const char* filename, float xPos, float yPos, float zPos)
     glEnable(GL_LIGHT0);
     glShadeModel(GL_SMOOTH);
     glDisable(GL_CULL_FACE);
-for(const Face& face : faces){
+    glDisable(GL_TEXTURE_2D);
+    glDisable(GL_BLEND);
+    glDisable(GL_ALPHA_TEST);
+    glDisable(GL_FOG);
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, colour);
+    for(const Face& face : faces){
     // Retrieve the vertices for this face
     const Vertex& v1 = vertices[face.v1 - 1];
     const Vertex& v2 = vertices[face.v2 - 1];
@@ -206,9 +211,10 @@ for(const Face& face : faces){
     glBegin(GL_TRIANGLES);
 
 
-    glVertex3f(v1.x + xPos, v1.y + yPos, v1.z + zPos);
-    glVertex3f(v2.x + xPos, v2.y + yPos, v2.z + zPos);
-    glVertex3f(v3.x + xPos, v3.y + yPos, v3.z + zPos);
+        glVertex3f(v1.x * scale + xPos, v1.y * scale + yPos, v1.z * scale + zPos);
+        glVertex3f(v2.x * scale + xPos, v2.y * scale + yPos, v2.z * scale + zPos);
+        glVertex3f(v3.x * scale + xPos, v3.y * scale + yPos, v3.z * scale + zPos);
+
 
     glEnd();
 }
@@ -349,11 +355,13 @@ void display(void)
     glRotatef(cam_theta, 0, 1, 0);
     glTranslatef(cam_pan[0], cam_pan[1], cam_pan[2]);
 
+
+    GLfloat colorTree[] = { 0.0f, 0.0f, 1.0f, 1.0f };
     //IMPORT MODEL
     glPushMatrix();
 
 
-    loadObj("car.obj", 0.5, 0.5, 0.5);
+    loadObj("tree.obj", 7, 0.5, 0.5, 0.2 , colorTree);
     glPopMatrix();
 
     glLightfv(GL_LIGHT0, GL_POSITION, lpos);
@@ -578,17 +586,11 @@ void keypress(unsigned char key, int x, int y)
 }
 
 void cameraYawRight(){
-   float cameraYaw = 0;
-   cameraYaw+= 0.1;
-    glRotatef(cameraYaw, 0, 0, 1);
-    glutPostRedisplay();
+
 
 }
 void cameraYawLeft(){
-    float cameraYawLeft = 0;
-    cameraYawLeft -= 0.1;
-            glRotatef(cameraYawLeft, 0, 0, 1);
-    glutPostRedisplay();
+
 }
 void skeypress(int key, int x, int y)
 {
