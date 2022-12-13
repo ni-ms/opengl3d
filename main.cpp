@@ -111,33 +111,6 @@ struct Face
 std::vector<Vertex> vertices;  // vector to store vertices
 std::vector<Face> faces;       // vector to store faces
 
-void render()
-{
-    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-
-
-
-    // iterate through all the faces
-    for (int i = 0; i < faces.size(); i++)
-    {
-        Face face = faces[i];
-
-        // get the vertices of the face
-        Vertex v1 = vertices[face.v1 - 1];
-        Vertex v2 = vertices[face.v2 - 1];
-        Vertex v3 = vertices[face.v3 - 1];
-
-        // draw the face
-        glBegin(GL_TRIANGLES);
-        glVertex3f(v1.x, v1.y, v1.z);
-        glVertex3f(v2.x, v2.y, v2.z);
-        glVertex3f(v3.x, v3.y, v3.z);
-        glEnd();
-    }
-
-    glutSwapBuffers();
-}
-
 void loadObj(const char* filename, float xPos, float yPos, float zPos, float scale, GLfloat colour[])
 {
     // open the file
@@ -153,6 +126,7 @@ void loadObj(const char* filename, float xPos, float yPos, float zPos, float sca
     std::string line;
     Face face{};
     Vertex vertex{};
+    Vertex normal{};
     while (std::getline(file, line))
     {
         // split the line into tokens
@@ -166,7 +140,6 @@ void loadObj(const char* filename, float xPos, float yPos, float zPos, float sca
         if (tokens[0] == "v")
         {
             // line defines a vertex
-
             vertex.x = std::stof(tokens[1]);
             vertex.y = std::stof(tokens[2]);
             vertex.z = std::stof(tokens[3]);
@@ -175,7 +148,6 @@ void loadObj(const char* filename, float xPos, float yPos, float zPos, float sca
         else if (tokens[0] == "f")
         {
             // line defines a face
-
             face.v1 = std::stoi(tokens[1]);
             face.v2 = std::stoi(tokens[2]);
             face.v3 = std::stoi(tokens[3]);
@@ -183,43 +155,34 @@ void loadObj(const char* filename, float xPos, float yPos, float zPos, float sca
         }
     }
     file.close();
-//    // Clear the screen
-//    glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-//
-//    // Set the view matrix
-//    glMatrixMode(GL_MODELVIEW);
-//    glLoadIdentity();
-
 
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
-    glShadeModel(GL_SMOOTH);
-    glDisable(GL_CULL_FACE);
-    glDisable(GL_TEXTURE_2D);
-    glDisable(GL_BLEND);
-    glDisable(GL_ALPHA_TEST);
-    glDisable(GL_FOG);
-    glMaterialfv(GL_FRONT, GL_DIFFUSE, colour);
+
+    //glDisable(GL_CULL_FACE);
+
+    glPolygonMode(GL_BACK, GL_FILL);
+
+    // Set the colour of the model
+    glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, colour);
     for(const Face& face : faces){
     // Retrieve the vertices for this face
     const Vertex& v1 = vertices[face.v1 - 1];
     const Vertex& v2 = vertices[face.v2 - 1];
     const Vertex& v3 = vertices[face.v3 - 1];
 
-    // Draw the face
     glBegin(GL_TRIANGLES);
-
-
         glVertex3f(v1.x * scale + xPos, v1.y * scale + yPos, v1.z * scale + zPos);
         glVertex3f(v2.x * scale + xPos, v2.y * scale + yPos, v2.z * scale + zPos);
         glVertex3f(v3.x * scale + xPos, v3.y * scale + yPos, v3.z * scale + zPos);
-
-
     glEnd();
 }
-    // Swap the front and back buffers
-//    glutSwapBuffers();
+
+//ensure that only one object is rendered
+    vertices.clear();
+    faces.clear();
+
 
 
 }
@@ -324,7 +287,7 @@ int main(int argc, char **argv)
     glutMotionFunc(motion);
 
     glEnable(GL_DEPTH_TEST);
-    glEnable(GL_CULL_FACE);
+
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
 //    glEnable(GL_MULTISAMPLE);
@@ -357,12 +320,24 @@ void display(void)
 
 
     GLfloat colorTree[] = { 0.0f, 0.0f, 1.0f, 1.0f };
-    //IMPORT MODEL
+    //IMPORT TREE
     glPushMatrix();
-
-
     loadObj("tree.obj", 7, 0.5, 0.5, 0.2 , colorTree);
     glPopMatrix();
+
+    //IMPORT ROCK
+    GLfloat colorRock[] = { 0.0f, 0.0f, 0.0f, 1.0f };
+    glPushMatrix();
+    loadObj("rocks.obj", 3, 0.5, 0.5, 5 , colorRock);
+    glPopMatrix();
+
+    //Import stairs
+    GLfloat colorStairs[] = { 0.75f, 0.75f, 0.75f, 1.0f };
+    glPushMatrix();
+    loadObj("stairs.obj", 6, 0, -0.9, 1.5 , colorStairs);
+    glPopMatrix();
+
+
 
     glLightfv(GL_LIGHT0, GL_POSITION, lpos);
 
