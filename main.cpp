@@ -326,7 +326,7 @@ void display(void)
     //IMPORT ROCK
     GLfloat colorRock[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     glPushMatrix();
-    loadObj("rocks.obj", 35, 0, 4, 2 , colorRock);
+    loadObj("rocks.obj", 25, 0, 4, 1 , colorRock);
     glPopMatrix();
 
 
@@ -334,6 +334,12 @@ void display(void)
     GLfloat colorKatana[] = { 0.75f, 0.75f, 0.75f, 1.0f };
     glPushMatrix();
     loadObj("katana.obj", 0, 1, 0, 0.04 , colorKatana);
+    glPopMatrix();
+
+    //Import window
+    GLfloat colorWindow[] = { 0.0f, 0.0f, 1.0f, 1.0f };
+    glPushMatrix();
+    loadObj("window.obj", 0, 3, -3, 1 , colorWindow);
     glPopMatrix();
 
 
