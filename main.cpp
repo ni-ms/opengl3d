@@ -51,6 +51,44 @@ void skeypress(int key, int x, int y);
 void mouse(int bn, int st, int x, int y);
 void motion(int x, int y);
 
+void drawBush(GLdouble x, GLdouble y, GLdouble z, GLdouble r, GLdouble h)
+{
+
+
+    // Load the texture for the bush
+    GLfloat colour[] = { 0.0f, 0.5f, 0.0f, 1.0f };
+    glMaterialfv(GL_FRONT, GL_DIFFUSE, colour);
+    glTranslated(x, y, z);
+    // Begin drawing the bush
+    glBegin(GL_TRIANGLES);
+
+    // Create the first triangle of the bush
+    glTexCoord2f(0.0, 0.0);
+    glVertex3f(-0.5, 0.0, 0.0);
+
+    glTexCoord2f(1.0, 0.0);
+    glVertex3f(0.5, 0.0, 0.0);
+
+    glTexCoord2f(0.5, 1.0);
+    glVertex3f(0.0, 0.5, 0.0);
+
+    // Create the second triangle of the bush
+    glTexCoord2f(0.0, 0.0);
+    glVertex3f(-0.4, 0.0, 0.1);
+
+    glTexCoord2f(1.0, 0.0);
+    glVertex3f(0.4, 0.0, 0.1);
+
+    glTexCoord2f(0.5, 1.0);
+    glVertex3f(0.0, 0.4, 0.1);
+
+    // End drawing the bush
+    glEnd();
+
+    // Disable texture mapping
+    glDisable(GL_TEXTURE_2D);
+}
+
 
 void DrawCube(GLfloat centerPosX, GLfloat centerPosY, GLfloat centerPosZ, GLfloat Clength, GLfloat Cbreadth, GLfloat Cheight, GLfloat colour[])
 {
@@ -202,7 +240,7 @@ void display(void)
 //    glTranslatef(-8, 3, -5);
 //    glScalef(3, 7, 4);
 //    glutSolidCube(1);
-GLfloat color[] = {1.0, 0.93, 0.75, 1.0};
+GLfloat color[] = {0.58, 0.23, 0.19, 1.0};
     DrawCube(-8, 3, -5, 3, 4, 7, color);
     glPopMatrix();
 
@@ -261,6 +299,8 @@ GLfloat color[] = {1.0, 0.93, 0.75, 1.0};
     //SOLID SPHERE
 
     glPushMatrix();
+    GLfloat colorGlass[] = {0.96, 0.99, 1, 0};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, colorGlass);
     glTranslated(0, 5, -5);
     glScalef(1, 1, 0.5);
     glutSolidSphere(3, 20, 20);
@@ -268,9 +308,22 @@ GLfloat color[] = {1.0, 0.93, 0.75, 1.0};
 
     //Grass paths
     glPushMatrix();
+    GLfloat color6[] = {0.5, 0.5, 0.5, 1.0};
+    DrawCube(-2, 0, 5, 2, 10, 0.5, color6);
+    DrawCube(2, 0, 5, 2, 10, 0.5, color6);
     glPopMatrix();
-    glBegin(GL_QUADS);
 
+
+    //BUSH
+
+    glPushMatrix();
+
+    glPopMatrix();
+
+
+    glBegin(GL_QUADS);
+    GLfloat color7[] = {0.5, 0.5, 0, 0};
+    glMaterialfv(GL_FRONT_AND_BACK, GL_AMBIENT_AND_DIFFUSE, color7);
     glVertex3f(-10, 0, -10);
     glVertex3f(-10, 0, 10);
     glVertex3f(10, 0, 10);

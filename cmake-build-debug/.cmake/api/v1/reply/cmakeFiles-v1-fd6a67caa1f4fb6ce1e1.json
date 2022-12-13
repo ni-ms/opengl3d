@@ -144,6 +144,22 @@
 			"isCMake" : true,
 			"isExternal" : true,
 			"path" : "D:/Software/TOOLBOX/apps/CLion/ch-0/223.7571.171/bin/cmake/win/share/cmake-3.24/Modules/CMakeCommonLanguageInclude.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/msys64/mingw64/lib/cmake/assimp-5.2/assimpConfigVersion.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/msys64/mingw64/lib/cmake/assimp-5.2/assimpConfig.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/msys64/mingw64/lib/cmake/assimp-5.2/assimpTargets.cmake"
+		},
+		{
+			"isExternal" : true,
+			"path" : "C:/msys64/mingw64/lib/cmake/assimp-5.2/assimpTargets-relwithdebinfo.cmake"
 		}
 	],
 	"kind" : "cmakeFiles",
