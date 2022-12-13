@@ -160,9 +160,7 @@ void loadObj(const char* filename, float xPos, float yPos, float zPos, float sca
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0);
 
-    //glDisable(GL_CULL_FACE);
 
-    glPolygonMode(GL_BACK, GL_FILL);
 
     // Set the colour of the model
     glMaterialfv(GL_FRONT_AND_BACK, GL_DIFFUSE, colour);
@@ -322,21 +320,34 @@ void display(void)
     GLfloat colorTree[] = { 0.0f, 0.0f, 1.0f, 1.0f };
     //IMPORT TREE
     glPushMatrix();
-    loadObj("tree.obj", 7, 0.5, 0.5, 0.2 , colorTree);
+    loadObj("tree.obj", -4, 0.5, 3, 0.2 , colorTree);
     glPopMatrix();
 
     //IMPORT ROCK
     GLfloat colorRock[] = { 0.0f, 0.0f, 0.0f, 1.0f };
     glPushMatrix();
-    loadObj("rocks.obj", 3, 0.5, 0.5, 5 , colorRock);
+    loadObj("rocks.obj", 35, 0, 4, 2 , colorRock);
     glPopMatrix();
 
-    //Import stairs
-    GLfloat colorStairs[] = { 0.75f, 0.75f, 0.75f, 1.0f };
+
+    //Import katana
+    GLfloat colorKatana[] = { 0.75f, 0.75f, 0.75f, 1.0f };
     glPushMatrix();
-    loadObj("stairs.obj", 6, 0, -0.9, 1.5 , colorStairs);
+    loadObj("katana.obj", 0, 1, 0, 0.04 , colorKatana);
     glPopMatrix();
 
+
+//STAIRS
+
+glPushMatrix();
+GLfloat colorStairs[] = { 0.75f, 0.75f, 0.75f, 1.0f };
+DrawCube(5, 0, -1.4, 1, 3, .8, colorStairs);
+glPopMatrix();
+
+    glPushMatrix();
+
+    DrawCube(-5, 0, -1.4, 1, 3, .8, colorStairs);
+    glPopMatrix();
 
 
     glLightfv(GL_LIGHT0, GL_POSITION, lpos);
