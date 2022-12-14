@@ -240,7 +240,7 @@ void loadObj(const char* filename, float xPos, float yPos, float zPos, float sca
 
 
 int win_width, win_height;
-float cam_theta, cam_phi = 25, cam_dist = 8;
+float cam_theta, cam_phi = 25, cam_dist = 8, cam_yaw = 0;
 float cam_pan[3];
 int mouse_x, mouse_y;
 int bnstate[8];
@@ -301,6 +301,7 @@ void display(void)
     glTranslatef(0, 0, -cam_dist);
     glRotatef(cam_phi, 1, 0, 0);
     glRotatef(cam_theta, 0, 1, 0);
+    glRotatef(cam_yaw, 0, 0, 1);
     glTranslatef(cam_pan[0], cam_pan[1], cam_pan[2]);
 
 
@@ -565,12 +566,21 @@ void keypress(unsigned char key, int x, int y)
 }
 
 void cameraYawRight(){
-
-
+    cam_yaw += 0.1;
+    if(cam_yaw > 360){
+        cam_yaw = 0;
+    }
+    glutPostRedisplay();
 }
+
 void cameraYawLeft(){
-
+    cam_yaw -= 0.1;
+    if(cam_yaw < 0){
+        cam_yaw = 360;
+    }
+    glutPostRedisplay();
 }
+
 void skeypress(int key, int x, int y)
 {
     switch(key) {
@@ -586,8 +596,6 @@ void skeypress(int key, int x, int y)
             case GLUT_KEY_F3:
                 cameraYawLeft();
             break;
-
-
 
 
         default:
