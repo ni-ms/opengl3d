@@ -1,0 +1,401 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 16615,
+      "max": [
+        2.376741647720337,
+        1.5754035711288452,
+        8.348121643066406
+      ],
+      "min": [
+        -2.2727699279785156,
+        -2.617344856262207,
+        -2.5784496756386943e-05
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 199380,
+      "componentType": 5126,
+      "count": 16615,
+      "max": [
+        0.9999871253967285,
+        0.9998905658721924,
+        1.0
+      ],
+      "min": [
+        -0.9999884963035583,
+        -0.9999622702598572,
+        -0.9999969601631165
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 16615,
+      "max": [
+        0.9999974370002747,
+        0.9999841451644897,
+        0.9999843239784241,
+        1.0
+      ],
+      "min": [
+        -0.9999973177909851,
+        -0.9999964237213135,
+        -0.9999600648880005,
+        -1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 16615,
+      "max": [
+        2.3913097381591797,
+        1.5004407167434692
+      ],
+      "min": [
+        -1.543941617012024,
+        -0.5
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 52926,
+      "type": "SCALAR"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 398760,
+      "componentType": 5126,
+      "count": 14172,
+      "max": [
+        2.998643636703491,
+        2.15734601020813,
+        8.972192764282227
+      ],
+      "min": [
+        -2.87528395652771,
+        -3.2259345054626465,
+        1.1229264736175537
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 568824,
+      "componentType": 5126,
+      "count": 14172,
+      "max": [
+        0.9996219277381897,
+        0.9999310970306396,
+        0.9995195865631104
+      ],
+      "min": [
+        -0.9999082684516907,
+        -0.9998425841331482,
+        -0.9998388290405273
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "byteOffset": 265840,
+      "componentType": 5126,
+      "count": 14172,
+      "max": [
+        0.9999338984489441,
+        0.9999467134475708,
+        0.9999857544898987,
+        1.0
+      ],
+      "min": [
+        -0.9998455047607422,
+        -0.9998739957809448,
+        -0.9980888962745667,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "byteOffset": 132920,
+      "componentType": 5126,
+      "count": 14172,
+      "max": [
+        1.0,
+        1.0990395545959473
+      ],
+      "min": [
+        0.0,
+        0.0
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "byteOffset": 211704,
+      "componentType": 5125,
+      "count": 28344,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "AGASTRO (https://sketchfab.com/AGASTRO)",
+      "license": "CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)",
+      "source": "https://sketchfab.com/3d-models/tree-pinus-2e16895e73354144b5a41192b7810121",
+      "title": "Tree Pinus"
+    },
+    "generator": "Sketchfab-14.35.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 325080,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 246296,
+      "byteOffset": 325080,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 738888,
+      "byteOffset": 571376,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 492592,
+      "byteOffset": 1310264,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1802856,
+      "uri": "scene.bin"
+    }
+  ],
+  "images": [
+    {
+      "uri": "textures/Bark_Pinus-ponderosa_baseColor.png"
+    },
+    {
+      "uri": "textures/Bark_Pinus-ponderosa_normal.png"
+    },
+    {
+      "uri": "textures/Leaf_Pinus-ponderosa_baseColor.png"
+    },
+    {
+      "uri": "textures/Leaf_Pinus-ponderosa_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "name": "Bark_Pinus-ponderosa",
+      "normalTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0,
+        "roughnessFactor": 0.8211145618000169
+      }
+    },
+    {
+      "alphaMode": "BLEND",
+      "doubleSided": true,
+      "name": "Leaf_Pinus-ponderosa",
+      "normalTexture": {
+        "index": 3
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 2
+        },
+        "metallicFactor": 0.30933427606636515,
+        "roughnessFactor": 0.12038131925735392
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Tree_Pinus-ponderosa_D_spring-summer-autumn.001_Bark_Pinus-ponderosa_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    },
+    {
+      "name": "Tree_Pinus-ponderosa_D_spring-summer-autumn.001_Leaf_Pinus-ponderosa_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 6,
+            "POSITION": 5,
+            "TANGENT": 7,
+            "TEXCOORD_0": 8
+          },
+          "indices": 9,
+          "material": 1,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        1.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        2.220446049250313e-16,
+        -1.0,
+        0.0,
+        0.0,
+        1.0,
+        2.220446049250313e-16,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "matrix": [
+        0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.009999999776482582,
+        0.0,
+        0.0,
+        -0.009999999776482582,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "8d0d7c791faa401a9bbc299fa914f761.fbx"
+    },
+    {
+      "children": [
+        3
+      ],
+      "name": "RootNode"
+    },
+    {
+      "children": [
+        4,
+        5
+      ],
+      "matrix": [
+        100.0,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        -1.629206793918314e-05,
+        -99.99999999999868,
+        0.0,
+        0.0,
+        99.99999999999868,
+        -1.629206793918314e-05,
+        0.0,
+        0.0,
+        0.0,
+        0.0,
+        1.0
+      ],
+      "name": "Tree_Pinus-ponderosa_D_spring-summer-autumn.001"
+    },
+    {
+      "mesh": 0,
+      "name": "Tree_Pinus-ponderosa_D_spring-summer-autumn.001_Bark_Pinus-ponderosa_0"
+    },
+    {
+      "mesh": 1,
+      "name": "Tree_Pinus-ponderosa_D_spring-summer-autumn.001_Leaf_Pinus-ponderosa_0"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    },
+    {
+      "sampler": 0,
+      "source": 2
+    },
+    {
+      "sampler": 0,
+      "source": 3
+    }
+  ]
+}

@@ -1,17 +1,4 @@
-/* 3D view manipulation demo
- * Written by John Tsiombikas <nuclear@member.fsf.org>
- *
- * Demonstrates how to use freeglut callbacks to manipulate a 3D view, similarly
- * to how a modelling program or a model viewer would operate.
- *
- * Rotate: drag with the left mouse button.
- * Scale: drag up/down with the right mouse button.
- * Pan: drag with the middle mouse button.
- *
- * Press space to animate the scene and update the display continuously, press
- *   again to return to updating only when the view needs to change.
- * Press escape or q to exit.
- */
+
 #include <stdio.h>
 #include <string.h>
 #include <math.h>
